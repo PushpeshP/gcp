@@ -27,3 +27,8 @@ steps:
 
 images:
   - 'asia-south1-docker.pkg.dev/$PROJECT_ID/application/flask-contact-app:latest'
+
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/934139081348-compute@developer.gserviceaccount.com'
+
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
