@@ -31,4 +31,4 @@ images:
 serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/934139081348-compute@developer.gserviceaccount.com'
 
 options:
-  defaultLogsBucketBehavior: LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
