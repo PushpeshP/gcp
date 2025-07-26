@@ -19,7 +19,8 @@ steps:
       '--image', 'asia-south1-docker.pkg.dev/$PROJECT_ID/application/flask-contact-app:latest',
       '--region', 'asia-south1',
       '--platform', 'managed',
-      '--allow-unauthenticated'
+      '--allow-unauthenticated',
+      '--set-env-vars', 'PUBSUB_TOPIC=cloud-build-topics'
     ]
 
 images:

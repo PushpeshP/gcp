@@ -6,9 +6,8 @@ import os, json
 app = Flask(__name__)
 db = firestore.Client()
 
-# Upload contact info to Cloud Storage
 def upload_to_bucket(data):
-    bucket_name = "gcp_pushpesh"  # ✅ Replace with your actual bucket name
+    bucket_name = "gcp_pushpesh"  # ✅ Your actual bucket name
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
 
@@ -20,16 +19,17 @@ def upload_to_bucket(data):
     blob.upload_from_string(content)
     print(f"✅ Uploaded to Cloud Storage: {file_name}")
 
-# Publish message to Pub/Sub topic
 def publish_to_pubsub(data):
     publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path("e-outrider-466612-u0", "cloud-build-topics")  # ✅ Replace with your project and topic
+    
+    # ✅ Dynamic project and topic from environment
+    project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+    topic_id = os.getenv("PUBSUB_TOPIC", "cloud-build-topics")  # default fallback
+    topic_path = publisher.topic_path(project_id, topic_id)
 
-    message_json = json.dumps(data)
-    message_bytes = message_json.encode("utf-8")
-
-    future = publisher.publish(topic_path, data=message_bytes)
-    print(f"✅ Pub/Sub message published: {future.result()}")
+    message_json = json.dumps(data).encode("utf-8")
+    future = publisher.publish(topic_path, data=message_json)
+    print(f"✅ Pub/Sub message published to {topic_id}: {future.result()}")
 
 @app.route('/')
 def form():
