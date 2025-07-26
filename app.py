@@ -48,7 +48,8 @@ def submit():
     publish_to_pubsub(data)
 
     return "✅ Thanks! Your message has been received."
-    
-    if __name__ == '__main__':
+
+# ✅ यह block file के बाहर होना चाहिए
+if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port, debug=False)
