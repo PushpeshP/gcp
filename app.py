@@ -23,7 +23,7 @@ def upload_to_bucket(data):
 # Publish message to Pub/Sub topic
 def publish_to_pubsub(data):
     publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path("e-outrider-466612-u0", "contact-form-events")  # ✅ Replace with your project and topic
+    topic_path = publisher.topic_path("e-outrider-466612-u0", "cloud-build-topics")  # ✅ Replace with your project and topic
 
     message_json = json.dumps(data)
     message_bytes = message_json.encode("utf-8")
