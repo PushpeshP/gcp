@@ -1,5 +1,4 @@
 steps:
-  # Docker Image Build
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', '-t',
@@ -7,14 +6,12 @@ steps:
       '.'
     ]
 
-  # Docker Image Push
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
       'asia-south1-docker.pkg.dev/$PROJECT_ID/application/flask-contact-app:latest'
     ]
 
-  # Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: [

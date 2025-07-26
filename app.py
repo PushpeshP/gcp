@@ -23,7 +23,7 @@ def upload_to_bucket(data):
 # Publish message to Pub/Sub topic
 def publish_to_pubsub(data):
     publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path("e-outrider-466612-u0", "")  # ✅ Replace with your project and topic
+    topic_path = publisher.topic_path("e-outrider-466612-u0", "cloud-build-topics")  # ✅ Replace with your project and topic
 
     message_json = json.dumps(data)
     message_bytes = message_json.encode("utf-8")
@@ -48,7 +48,7 @@ def submit():
     publish_to_pubsub(data)
 
     return "✅ Thanks! Your message has been received."
-
-if __name__ == '__main__':
+    
+    if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port, debug=False)
